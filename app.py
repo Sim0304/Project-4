@@ -1,11 +1,10 @@
 import numpy as np
-
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-
 from flask import Flask, jsonify
+from collections import OrderedDict
 
 
 #################################################
@@ -58,7 +57,7 @@ def names():
     
     finalresults = []
     for i,j,k,l,m,n,o,p,q,r,s in results:
-        dataresults = {}
+        dataresults = OrderedDict()
         dataresults["id"] = i 
         dataresults["category"] = j 
         dataresults["sub_category"] = k 
@@ -71,7 +70,9 @@ def names():
         dataresults["deaths"] = r
         dataresults["regions"] = s
         finalresults.append(dataresults)
-        return {"results": finalresults} 
+        
+        
+    return {"results": finalresults} 
     
 
 if __name__ == '__main__':
