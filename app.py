@@ -1,24 +1,31 @@
 import sqlalchemy
+from sqlalchemy import create_engine, func
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
-from flask import Flask, jsonify
+from flask import Flask, render_template, url_for, jsonify
+from collections import OrderedDict
 from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
 
+
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?sslmode=require")
+
+# Engine creation 
+engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?options=endpoint%3Dep-sweet-meadow-71567163")
 
 # Reflect an existing database into a new model
 Base = automap_base()
-# Reflect the tables
+
+# reflect the tables
 Base.prepare(autoload_with=engine)
 
-# Save a reference to the table
+# Save reference to the table
+
 disasterdata = Base.classes.disasters
 
 #################################################
@@ -33,8 +40,14 @@ def welcome():
         "/api/v1.0/names<br/>"
     )
 
-@app.route("/api/v1.0/names")
-def names():
+@app.route("/dashboard")
+def graph():  
+
+    return render_template("index.html")
+    
+@app.route("/get_data")
+def dataset():
+
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
@@ -47,6 +60,7 @@ def names():
     ).all()
 
     session.close()
+
 
     # Convert the results to a list of dictionaries
     finalresults = []
@@ -68,6 +82,7 @@ def names():
 
     # Return JSON response using jsonify
     return jsonify({"results": finalresults})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
