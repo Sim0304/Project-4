@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pie Chart</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    .legend {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .legend li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .legend-color {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+</style>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Disasters in Australia</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="well">
+          <h5>Select State:</h5>
+          <select id="selState" onchange="optionChanged(this.value)"></select>
+          <div id="deathsPie"></div>
+          <div id="deathsLegend"></div>
+          
+          <div id="injuriesPie"></div>
+          <div id="injuriesLegend"></div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="../static/app.js"></script>
+ 
+</body>
+
+</html>
