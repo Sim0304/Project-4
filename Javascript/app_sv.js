@@ -66,10 +66,7 @@ d3.json(url)
         .domain(startdateBarData.map(d => d.decade))
         .range([0, width])
         .padding(0.1)
-      svg.append("g")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0));
-        
+      
       const yScale = d3.scaleLinear()
         .domain([0, d3.max(startdateBarData, d => d3.sum(d.categories, c => c.count))])
         .range([height, 0]);
