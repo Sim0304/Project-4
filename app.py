@@ -10,20 +10,15 @@ from collections import OrderedDict
 # Database Setup
 #################################################
 
-# try:
-#     engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?sslmode=require")
-#                        connect_args={"host": "ep-sweet-meadow-71567163.us-east-2.aws.neon.tech", "port": 5432, "sslmode": "require", "options": "-c statement_timeout=10000"})
-# except Exception as e:
-#     print(f"Error connecting to the database: {e}")
-
+# Engine creation 
 engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?options=endpoint%3Dep-sweet-meadow-71567163")
 
 # reflect an existing database into a new model
 Base = automap_base()
+
 # reflect the tables
 Base.prepare(autoload_with=engine)
 
-print(Base.classes.keys())
 # Save reference to the table
 disasterdata = Base.classes.disasters
 
@@ -42,31 +37,15 @@ def welcome():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
-        f"/api/v1.0/names<br/>"
+        f"/DashBoard<br/>"
     )
 
-@app.route("/barGraph")
-def graph():
-    # Create our session (link) from Python to the DB
-    session = Session(engine)
+@app.route("/dashboard")
+def graph():  
 
-    """Return a list of all column data available"""
-    # Query all passengers
-    results = session.query(disasterdata.category, func.sum(disasterdata.deaths), func.sum(disasterdata.injuries)).group_by(disasterdata.category).order_by(func.sum(disasterdata.deaths).desc()).all()
+    return render_template("index.html")
     
-    
-    # print(results)
-    session.close()
-
-    
-    labels  = [row[0] for row in results]
-    deaths = [row[1] for row in results]   
-    injuries = [row[2] for row in results]  
-    
-        
-    return render_template("index.html", labels=labels, deaths=deaths, injuries=injuries)
-    
-@app.route("/api/v1.0/names")
+@app.route("/get_data")
 def dataset():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -80,7 +59,7 @@ def dataset():
     print(results)
     session.close()
 
-    
+    # Create a list to hold all the inputs
     finalresults = []
     for i,j,k,l,m,n,o,p,q,r,s in results:
         dataresults = OrderedDict()
