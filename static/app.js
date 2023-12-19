@@ -65,12 +65,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     datasets: [
                         {
                         label: "Death Total",
-                        data: xvalue
+                        data: xvalue,
+                        barPercentage: 1,
+                        categoryPercentage: 0.5,
+                        barThickness: 10,
+                        maxBarThickness: 20,
+                        minBarLength: 0,
                         }, 
 
                         {
                         label: "Injury Total",
-                        data: injuryValue
+                        data: injuryValue,
+                        barPercentage: 1,
+                        categoryPercentage: 0.5,
+                        barThickness: 6,
+                        maxBarThickness: 8,
+                        minBarLength: 0,
                         }
                 ]
                 },
@@ -158,6 +168,15 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             //console.log(injuryData);
+            let sortData = []
+            for (let i = 0; i<categoryList.length;i++) {
+                sortData.push(categoryList[i],injuryData[i])
+            }
+            console.log(sortData)
+
+            sortData.sort(function(a,b) {b[1] - a[1]})
+
+            console.log(sortData)
 
             return deathData, injuryData, categoryList
         };
