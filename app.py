@@ -10,20 +10,15 @@ from collections import OrderedDict
 # Database Setup
 #################################################
 
-# try:
-#     engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?sslmode=require")
-#                        connect_args={"host": "ep-sweet-meadow-71567163.us-east-2.aws.neon.tech", "port": 5432, "sslmode": "require", "options": "-c statement_timeout=10000"})
-# except Exception as e:
-#     print(f"Error connecting to the database: {e}")
-
+# Engine creation 
 engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?options=endpoint%3Dep-sweet-meadow-71567163")
 
 # reflect an existing database into a new model
 Base = automap_base()
+
 # reflect the tables
 Base.prepare(autoload_with=engine)
 
-print(Base.classes.keys())
 # Save reference to the table
 disasterdata = Base.classes.disasters
 
@@ -37,6 +32,7 @@ app = Flask(__name__)
 # Flask Routes 
 #################################################
 
+<<<<<<< HEAD
 # @app.route("/")
 # def welcome():
 #     """List all available api routes."""
@@ -50,6 +46,22 @@ def index():
     return render_template('index.html')
 
 @app.route("/api/v1.0/names")
+=======
+@app.route("/")
+def welcome():
+    """List all available api routes."""
+    return (
+        f"Available Routes:<br/>"
+        f"/DashBoard<br/>"
+    )
+
+@app.route("/dashboard")
+def graph():  
+
+    return render_template("index.html")
+    
+@app.route("/get_data")
+>>>>>>> 38496352896b4d5e75409d5ebf7229a53f4e002b
 def dataset():
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -63,7 +75,7 @@ def dataset():
     print(results)
     session.close()
 
-    
+    # Create a list to hold all the inputs
     finalresults = []
     for i,j,k,l,m,n,o,p,q,r,s in results:
         dataresults = OrderedDict()
