@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-const url = "http://127.0.0.1:5000/api/v1.0/names";
-
-d3.json(url).then(d => {
-    console.log(d.result);
-});
-=======
 url = "http://127.0.0.1:5000/get_data"
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -233,6 +226,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-
-
->>>>>>> 38496352896b4d5e75409d5ebf7229a53f4e002b

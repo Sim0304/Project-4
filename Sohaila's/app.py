@@ -1,24 +1,19 @@
-import numpy as np
-import sqlalchemy
+from flask import Flask, render_template
+from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
-from flask import Flask, render_template,  jsonify
 from collections import OrderedDict
-
 
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?sslmode=require")
 
-# reflect an existing database into a new model
+engine = create_engine("postgresql://sohailanazari07:bg1m9VKeRNvx@ep-sweet-meadow-71567163.us-east-2.aws.neon.tech/disasters?options=endpoint%3Dep-sweet-meadow-71567163")
+
 Base = automap_base()
-# reflect the tables
 Base.prepare(autoload_with=engine)
 
 print(Base.classes.keys())
-# Save reference to the table
 disasterdata = Base.classes.disasters
 
 #################################################
@@ -30,11 +25,10 @@ app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+
 @app.route("/")
 def welcome():
     return render_template("index.html")
-
-
 
 @app.route("/get_data")
 def names():
@@ -51,6 +45,7 @@ def names():
     session.close()
 
     
+
     finalresults = []
     for i,j,k,l,m,n,o,p,q,r,s in results:
         dataresults = OrderedDict()
@@ -66,10 +61,26 @@ def names():
         dataresults["deaths"] = r
         dataresults["regions"] = s
         finalresults.append(dataresults)
-        
+
+    return {"results": finalresults} 
+
+@app.route("/get_transformed_data")
+def transformeddataset():
+    session = Session(engine)
+    results = session.query( disasterdata.category, disasterdata.injuries, disasterdata.deaths, disasterdata.regions).all()
+    session.close()
+   
+    finalresults = []
+    for a,b,c,d in results:
+        dataresults = OrderedDict()
+        dataresults["category"] = a
+        dataresults["injuries"] = b
+        dataresults["deaths"] = c
+        dataresults["regions"] = d
+        finalresults.append(dataresults)
         
     return {"results": finalresults} 
-    
 
 if __name__ == '__main__':
     app.run(debug=True)
+
