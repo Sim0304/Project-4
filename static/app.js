@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //Group by regions and the category names and find the sum of their injuries
         let groupInjuryData = d3.rollups(data, v => d3.sum(v, d=>d.injuries), d=>d.regions, d=>d.category)
 
+        console.log(groupDeathData)
         //////////////////////////////
         ///// Display First Data ///// SO WE CAN HAVE THE BARGRAPH DISPLAYED STRAIGHTAWAY WHEN THE WEBPAGE IS LOADED
         //////////////////////////////
@@ -65,22 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     datasets: [
                         {
                         label: "Death Total",
-                        data: xvalue,
-                        barPercentage: 1,
-                        categoryPercentage: 0.5,
-                        barThickness: 10,
-                        maxBarThickness: 20,
-                        minBarLength: 0,
+                        data: xvalue
                         }, 
 
                         {
                         label: "Injury Total",
-                        data: injuryValue,
-                        barPercentage: 1,
-                        categoryPercentage: 0.5,
-                        barThickness: 6,
-                        maxBarThickness: 8,
-                        minBarLength: 0,
+                        data: injuryValue
                         }
                 ]
                 },
@@ -93,6 +84,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }}
             )
 
+        };
+
+        function deleteGraph() {
+            if (myChart) {
+                myChart.destroy();
+        }
         };
     ///////////////////////////////
     ///// Check menu selection ////
@@ -110,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         function optionChanged(value) {
             selectElement = document.querySelector("#statesFilter");
             output = selectElement.value;
-
             //Call functions on change
             deleteGraph();
             //Select state data
@@ -168,15 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             //console.log(injuryData);
-            let sortData = []
-            for (let i = 0; i<categoryList.length;i++) {
-                sortData.push(categoryList[i],injuryData[i])
-            }
-            console.log(sortData)
-
-            sortData.sort(function(a,b) {b[1] - a[1]})
-
-            console.log(sortData)
 
             return deathData, injuryData, categoryList
         };
@@ -185,17 +172,13 @@ document.addEventListener('DOMContentLoaded', function() {
         /////Delete previous graph/////
         ///////////////////////////////
 
-        function deleteGraph() {
-            if (myChart) {
-                myChart.destroy();
-        }
-        };
+      
 
         ////////////////////////
         /////Call functions/////
         ////////////////////////
 
-        stateGraph(deathData,categoryList, injuryData);
+        //stateGraph(deathData,categoryList, injuryData);
 
         ////////////////////////////
         ///// Inital Map graph /////
@@ -244,6 +227,3 @@ document.addEventListener('DOMContentLoaded', function() {
 }) // end
 
 });
-
-
-
