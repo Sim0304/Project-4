@@ -37,7 +37,7 @@ def welcome():
     """List all available API routes."""
     return (
         "Available Routes:<br/>"
-        "/api/v1.0/get_data<br/>"
+        "/api/v1.0/names<br/>"
     )
 
 @app.route("/dashboard")
