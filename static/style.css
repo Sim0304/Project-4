@@ -1,1 +1,13 @@
-#map { height: 180px; }
+#map { height: 180px; } */
+
+.tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    pointer-events: none; /* This ensures the tooltip doesn't interfere with mouse events on the chart */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s; /* Smooth transition */
+    z-index: 10; /* Ensure it appears on top */
+}
