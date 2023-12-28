@@ -37,7 +37,10 @@ def welcome():
 
     return (
         "Available Routes:<br/>"
-        "/api/v1.0/get_data<br/>"
+        "/get_data<br/>"
+        "/piechart<br/>"
+        "/barchart<br/>"
+        "/linechart<br/>"
     )
 #######################
 ##### HTML Routes #####
