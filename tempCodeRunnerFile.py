@@ -29,23 +29,18 @@ Base.prepare(autoload_with=engine)
 disasterdata = Base.classes.disasters
 
 #################################################
-# Flask Routes 
+# Flask Routes
 #################################################
 
-@app.route('/piechart')
-def index():
-    return render_template('index2.html')
-=======
 @app.route("/")
 def welcome():
     """List all available API routes."""
-
     return (
         "Available Routes:<br/>"
-        "/api/v1.0/get_data<br/>"
+        "/api/v1.0/names<br/>"
     )
 
-@app.route("/barchart")
+@app.route("/dashboard")
 def graph():  
 
     return render_template("index.html")
@@ -67,7 +62,7 @@ def dataset():
     session.close()
 
 
-    # Create a list to hold all the inputs
+    # Convert the results to a list of dictionaries
     finalresults = []
     for row in results:
         dataresults = {

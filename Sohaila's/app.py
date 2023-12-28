@@ -21,6 +21,7 @@ disasterdata = Base.classes.disasters
 #################################################
 app = Flask(__name__)
 
+
 #################################################
 # Flask Routes
 #################################################
@@ -30,12 +31,21 @@ def welcome():
     return render_template("index.html")
 
 @app.route("/get_data")
-def dataset():
+def names():
+    # Create our session (link) from Python to the DB
     session = Session(engine)
+
+    """Return a list of all column data available"""
+    # Query all passengers
     results = session.query(disasterdata.id, disasterdata.category, disasterdata.sub_category, disasterdata.description, disasterdata.startdate,
                              disasterdata.enddate, disasterdata.latitude,disasterdata.logitude, disasterdata.injuries, disasterdata.deaths, disasterdata.regions).all()
+    
+    
+    print(results)
     session.close()
-   
+
+    
+
     finalresults = []
     for i,j,k,l,m,n,o,p,q,r,s in results:
         dataresults = OrderedDict()
@@ -51,7 +61,7 @@ def dataset():
         dataresults["deaths"] = r
         dataresults["regions"] = s
         finalresults.append(dataresults)
-        
+
     return {"results": finalresults} 
 
 @app.route("/get_transformed_data")
@@ -73,3 +83,4 @@ def transformeddataset():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
