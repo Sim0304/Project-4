@@ -35,7 +35,7 @@ disasterdata = Base.classes.disasters
 @app.route('/piechart')
 def index():
     return render_template('index2.html')
-=======
+
 @app.route("/")
 def welcome():
     """List all available API routes."""
