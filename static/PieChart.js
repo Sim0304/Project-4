@@ -5,7 +5,7 @@ const url = "http://127.0.0.1:5000/get_data";
 d3.json(url)
     .then(d => {
         // Log the fetched data for debugging
-        console.log(d.results);
+        // console.log(d.results);
         
         // Extract data
         const data = d.results;
@@ -127,7 +127,7 @@ function handleStateChange(data) {
 // Initialize the charts with the fetched data
 d3.json("http://127.0.0.1:5000/get_data")
     .then(d => {
-        console.log(d.results);
+        // console.log(d.results);
         const data = d.results;
         updateCharts(data);
         
