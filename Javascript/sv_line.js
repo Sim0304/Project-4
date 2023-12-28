@@ -34,77 +34,82 @@ d3.json(url)
 
       function updateChart(selectedCategory, selectedRegion) {
         const filteredData = results.filter(d =>
-            (selectedCategory === "All" || d.category === selectedCategory) &&
-            (selectedRegion === "All" || d.regions === selectedRegion)
+          (selectedCategory === "All" || d.category === selectedCategory) &&
+          (selectedRegion === "All" || d.regions === selectedRegion)
         );
-    
+      
         const startdateSet = d3.group(filteredData, d => {
-            const year = new Date(d.startdate).getFullYear();
-            return `${Math.floor(year / 10) * 10}`;
+          const year = new Date(d.startdate).getFullYear();
+          return `${Math.floor(year / 10) * 10}`;
         });
-    
+      
         // Create a set of all unique decades
         const allDecades = new Set(Array.from(startdateSet.keys()));
-    
+      
         // Fill in missing data for each category
-        const startdateBarData = Array.from(allDecades, decade => {
-            const entries = startdateSet.get(decade) || [];
-            return {
-                decade,
-                count: d3.sum(entries, d => 1),
-            };
+        const startdateLineData = Array.from(allDecades, decade => {
+          const entries = startdateSet.get(decade) || [];
+          return {
+            decade,
+            count: d3.sum(entries, d => 1),
+          };
         });
-    
+      
         // Sort the data by decade
-        startdateBarData.sort((a, b) => parseInt(a.decade) - parseInt(b.decade));
-    
+        startdateLineData.sort((a, b) => parseInt(a.decade) - parseInt(b.decade));
+      
         const xScale = d3.scaleBand()
-            .domain(startdateBarData.map(d => d.decade))
-            .range([0, width])
-            .padding(0.1);
-    
+          .domain(startdateLineData.map(d => d.decade))
+          .range([0, width])
+          .padding(0.1);
+      
         const yScale = d3.scaleLinear()
-            .domain([0, d3.max(startdateBarData, d => d.count)])
-            .range([height, 0]);
-    
+          .domain([0, d3.max(startdateLineData, d => d.count)])
+          .range([height, 0]);
+      
         // Check if x-axis element exists, and create it if not
         if (svg.select(".x-axis").empty()) {
-            svg.append("g")
-                .attr("class", "x-axis")
-                .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(xScale)
-                    .tickValues(xScale.domain())
-                    .tickFormat(d => d.substring(0, 4))
-                );
+          svg.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(xScale)
+              .tickValues(xScale.domain())
+              .tickFormat(d => d.substring(0, 4))
+            );
         } else {
-            // Update x-axis
-            svg.select(".x-axis")
-                .call(d3.axisBottom(xScale)
-                    .tickValues(xScale.domain())
-                    .tickFormat(d => d.substring(0, 4))
-                );
+          // Update x-axis
+          svg.select(".x-axis")
+            .call(d3.axisBottom(xScale)
+              .tickValues(xScale.domain())
+              .tickFormat(d => d.substring(0, 4))
+            );
         }
-    
+      
         // Create or update y-axis
         svg.selectAll(".y-axis").remove(); // Remove existing y-axis
         svg.append("g")
-            .attr("class", "y-axis")
-            .call(d3.axisLeft(yScale));
-    
-        // Bar drawing code
-        svg.selectAll(".bar").remove(); // Remove existing bars
-    
-        svg.selectAll(".bar")
-            .data(startdateBarData)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", d => xScale(d.decade))
-            .attr("y", d => yScale(d.count))
-            .attr("width", xScale.bandwidth())
-            .attr("height", d => height - yScale(d.count))
-            .attr("fill", "steelblue");
-    }
-                
+          .attr("class", "y-axis")
+          .call(d3.axisLeft(yScale));
+      
+        // Line drawing code
+        const line = d3.line()
+          .x(d => xScale(d.decade) + xScale.bandwidth() / 2)
+          .y(d => yScale(d.count))
+          .curve(d3.curveLinear);
+      
+        // Remove existing lines
+        svg.selectAll(".line").remove();
+      
+        // Append new line
+        svg.append("path")
+          .datum(startdateLineData)
+          .attr("class", "line")
+          .attr("fill", "none")
+          .attr("stroke", "steelblue")
+          .attr("d", line)
+          .append("title") // Add a title (tooltip) to the path
+          .text(d => `Decade: ${d.decade}\nCount: ${d.count}`);
+      }            
 
     // Initial chart update with no filters
     updateChart("All", "All");
