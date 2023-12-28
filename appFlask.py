@@ -48,7 +48,7 @@ def welcome():
 @app.route("/barchart")
 def graph():  
 
-    return render_template("index.html")
+    return render_template("BarChart.html")
     
 @app.route("/get_data")
 def dataset():
