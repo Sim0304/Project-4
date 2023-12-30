@@ -41,6 +41,7 @@ def welcome():
         "/piechart<br/>"
         "/barchart<br/>"
         "/linechart<br/>"
+        "/map<br/>"
     )
 #######################
 ##### HTML Routes #####
@@ -59,6 +60,11 @@ def barchart():
 def linechart():
 
     return render_template("LineChart.html")
+
+@app.route("/map")
+def map():
+
+    return render_template("map.html")
 
 
 ####################
