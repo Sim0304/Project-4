@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
         categorySet = d3.group(data, d => d.category)
 
         //Group by the regions and the category names and find the sum of their deaths
-        let groupDeathData = d3.rollups(data, v => d3.sum(v, d=>d.deaths), d=>d.regions, d=>d.category)
+        let groupDeathData = d3.rollups(data, v => d3.count(v, d=>d.deaths), d=>d.regions, d=>d.category)
         //Group by regions and the category names and find the sum of their injuries
         let groupInjuryData = d3.rollups(data, v => d3.sum(v, d=>d.injuries), d=>d.regions, d=>d.category)
 
+        console.log(groupDeathData)
         //////////////////////////////
         ///// Display First Data ///// SO WE CAN HAVE THE BARGRAPH DISPLAYED STRAIGHTAWAY WHEN THE WEBPAGE IS LOADED
         //////////////////////////////
@@ -64,14 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     labels: yvalue,
                     datasets: [
                         {
-                        label: "Death Total",
-                        data: xvalue
-                        }, 
+                        label: "Count Total",
+                        data: xvalue,
+                        backgroundColor: ["#FF5733", "#33FF57", "#5733FF", "#FF33A1", "#33A1FF", "#A1FF33", "#FF3333", "#33FFA1", "#A133FF", "#FFA133", "#33FF33", "#3333FF", "#FF33FF", "#33FFFF", "#FFFF33", "#FF6633", "#33FF66", "#6633FF", "#FF3366", "#3366FF"]
+                        } //, 
 
-                        {
-                        label: "Injury Total",
-                        data: injuryValue
-                        }
+                        // {
+                        // label: "Injury Total",
+                        // data: injuryValue
+                        // }
                 ]
                 },
                 options: {
@@ -149,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryInjuryList.push(selectedStateData[i][0])
         };
 
-            console.log(categoryInjuryList);
+            // console.log(categoryInjuryList);
         
         // Get all the injuries 
             injuryData = []
@@ -171,55 +173,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 myChart.destroy();
         }
         };
-
+  
         ////////////////////////
         /////Call functions/////
         ////////////////////////
 
         stateGraph(deathData,categoryList, injuryData);
-
-        ////////////////////////////
-        ///// Inital Map graph /////
-        ////////////////////////////
-
-        let map = L.map('map').setView([-25.529640517746024, 134.13308897243968], 3);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        ///////////////////////////
-        ///// Data collection /////
-        ///////////////////////////
-        //console.log(data)
-        console.log(statesSet.get("Victoria"))
-
-        ///// Plot Victoria markers //////
-        const LocationData = d3.rollup(
-            data,
-            // Aggregation function
-            values => {
-              const countByCategory = d3.rollup(
-                values,
-                // Count the number of occurrences for each category
-                v => v.length,
-                d => d.category
-              );
-          
-              // Create an array of objects with latitude and longitude for each group
-              const locations = values.map(d => ({ latitude: d.latitude, longitude: d.logitude }));
-          
-              return {
-                countByCategory,
-                locations,
-              };
-            },
-            d => d.regions,
-            d => d.category
-          );
-          
-          console.log(LocationData);
-
+        
 }).catch(function(error) {
     console.log(error)
 }) // end
