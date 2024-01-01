@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         radius:5,
                         color:categoryColor[indexValue],
                         fillOpacity:0.7
-                    }).addTo(map)
+                    }).addTo(map).bindPopup(`<p>${category}<br />${groupData.get(region).get(category)[i].description}</p>`).openPopup()
         }
     }}
 
