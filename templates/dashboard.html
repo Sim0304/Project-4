@@ -47,7 +47,8 @@
             <option value="Queensland">Queensland</option>
             <option value="Northern Territory">Northern Territory</option>
             <option value="Western Australia">Western Australia</option>
-            <option value="New South Wales">New South Wales</option>
+            <option value="New S
+            outh Wales">New South Wales</option>
             <option value="Tasmania">Tasmania</option>
             <option value="Victoria">Victoria</option>
             <option value="Outside Australia">Outside Australia</option>
@@ -79,27 +80,38 @@
   <!-- Pie Chart -->
     <h1>Disaster Statistics</h1>
     <!-- Dropdown to select state -->
-    <select id="stateSelector">
-        <option value="Queensland">Queensland</option>
-        <option value="Northern Territory">Northern Territory</option>
-        <option value="Western Australia">Western Australia</option>
-        <option value="New South Wales">New South Wales</option>
-        <option value="Tasmania">Tasmania</option>
-        <option value="Victoria">Victoria</option>
-        <option value="Outside Australia">Outside Australia</option>
-        <option value="Australian Capital Territory">Australian Capital Territory</option>
-    </select>
+    <div id="stateFilter">
+        <select id="mapFilter" onchange="optionChanged(this.value)">
+            <option value="Queensland">Queensland</option>
+            <option value="Northern Territory">Northern Territory</option>
+            <option value="Western Australia">Western Australia</option>
+            <option value="New South Wales">New South Wales</option>
+            <option value="Tasmania">Tasmania</option>
+            <option value="Victoria">Victoria</option>
+            <option value="Outside Australia">Outside Australia</option>
+            <option value="Australian Capital Territory">Australian Capital Territory</option>
+        </select>
+    </div>
 
     <h2>Total Deaths by Category</h2>
     <svg id="deathsChart"></svg>
     <h2>Total Injuries by Category</h2>
     <svg id="injuriesChart"></svg>
 
-   
-
-   
 
     <!-- Div for Map -->
+    <div id="MapFilter">
+        <select id="mapFilter" onchange="mapChanged(this.value)">
+            <option value="Queensland">Queensland</option>
+            <option value="Northern Territory">Northern Territory</option>
+            <option value="Western Australia">Western Australia</option>
+            <option value="New South Wales">New South Wales</option>
+            <option value="Tasmania">Tasmania</option>
+            <option value="Victoria">Victoria</option>
+            <option value="Outside Australia">Outside Australia</option>
+            <option value="Australian Capital Territory">Australian Capital Territory</option>
+        </select>
+    </div>
     <div id="map" style ="height: 400px"></div>
 
    
