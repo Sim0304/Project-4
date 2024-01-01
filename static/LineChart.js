@@ -1,8 +1,8 @@
-const url = "http://127.0.0.1:5000/get_data";
+let url = "http://127.0.0.1:5000/get_data";
 
 const margin = { top: 20, right: 30, bottom: 60, left: 40 };
-const width = 600 - margin.left - margin.right;
-const height = 600 - margin.top - margin.bottom;
+const width = 600; //- margin.left - margin.right;
+const height = 600; //- margin.top - margin.bottom;
 
 const svg = d3.select("#chart")
   .append("svg")
