@@ -31,25 +31,46 @@ disasterdata = Base.classes.disasters
 #################################################
 # Flask Routes 
 #################################################
-
-@app.route('/piechart')
-def index():
-    return render_template('index2.html')
-=======
 @app.route("/")
 def welcome():
     """List all available API routes."""
 
     return (
         "Available Routes:<br/>"
-        "/api/v1.0/get_data<br/>"
+        "/get_data<br/>"
+        "/piechart<br/>"
+        "/barchart<br/>"
+        "/linechart<br/>"
+        "/map<br/>"
     )
+#######################
+##### HTML Routes #####
+#######################
+
+@app.route('/piechart')
+def piechart():
+    return render_template('PieChart.html')
 
 @app.route("/barchart")
-def graph():  
+def barchart():  
 
-    return render_template("index.html")
-    
+    return render_template("BarChart.html")
+
+@app.route("/linechart")
+def linechart():
+
+    return render_template("LineChart.html")
+
+@app.route("/map")
+def map():
+
+    return render_template("map.html")
+
+
+####################
+##### Get Data #####
+####################
+
 @app.route("/get_data")
 def dataset():
 
@@ -87,6 +108,27 @@ def dataset():
 
     # Return JSON response using jsonify
     return jsonify({"results": finalresults})
+
+################################
+##### Get Transformed Data #####
+################################
+
+@app.route("/get_transformed_data")
+def transformeddataset():
+    session = Session(engine)
+    results = session.query( disasterdata.category, disasterdata.injuries, disasterdata.deaths, disasterdata.regions).all()
+    session.close()
+   
+    finalresults = []
+    for a,b,c,d in results:
+        dataresults = OrderedDict()
+        dataresults["category"] = a
+        dataresults["injuries"] = b
+        dataresults["deaths"] = c
+        dataresults["regions"] = d
+        finalresults.append(dataresults)
+        
+    return {"results": finalresults} 
 
 
 if __name__ == '__main__':
