@@ -40,15 +40,15 @@
   <!------------------------ Body ------------------------>
   <body>
 
-
+     <!--                              -->
      <!-- Div for state selection menu -->
-     <div id="stateFilter">
-        <select id="statesFilter" onchange="optionChanged(this.value)">
+     <!--                              -->
+     <div id="BarMenu">
+        <select id="BarFilter" onchange="optionChanged(this.value)">
             <option value="Queensland">Queensland</option>
             <option value="Northern Territory">Northern Territory</option>
             <option value="Western Australia">Western Australia</option>
-            <option value="New S
-            outh Wales">New South Wales</option>
+            <option value="New South Wales">New South Wales</option>
             <option value="Tasmania">Tasmania</option>
             <option value="Victoria">Victoria</option>
             <option value="Outside Australia">Outside Australia</option>
@@ -80,8 +80,8 @@
   <!-- Pie Chart -->
     <h1>Disaster Statistics</h1>
     <!-- Dropdown to select state -->
-    <div id="stateFilter">
-        <select id="mapFilter" onchange="optionChanged(this.value)">
+    <div id="stateMenu">
+        <select id="stateFilter" onchange="option2Changed(this.value)">
             <option value="Queensland">Queensland</option>
             <option value="Northern Territory">Northern Territory</option>
             <option value="Western Australia">Western Australia</option>
@@ -100,8 +100,8 @@
 
 
     <!-- Div for Map -->
-    <div id="MapFilter">
-        <select id="mapFilter" onchange="mapChanged(this.value)">
+    <div id="MapMenu">
+        <select id="mapFilter" onchange="optionChanged(this.value)">
             <option value="Queensland">Queensland</option>
             <option value="Northern Territory">Northern Territory</option>
             <option value="Western Australia">Western Australia</option>

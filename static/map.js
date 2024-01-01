@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         
         //Function optionChange, Change data & graph based on menu
-        function mapChanged(value) { 
+        function optionChanged(value) { 
             //deleteMarkers();
             categoryMarkers(value)
         }

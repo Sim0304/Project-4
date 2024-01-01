@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //Group by regions and the category names and find the sum of their injuries
         let groupInjuryData = d3.rollups(data, v => d3.sum(v, d=>d.injuries), d=>d.regions, d=>d.category)
 
-        console.log(groupDeathData)
+        // console.log(groupDeathData)
         //////////////////////////////
         ///// Display First Data ///// SO WE CAN HAVE THE BARGRAPH DISPLAYED STRAIGHTAWAY WHEN THE WEBPAGE IS LOADED
         //////////////////////////////
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ///////////////////////////////
 
         // Selecting drop down menu from html code
-        let button = d3.select("#statesFilter");
+        let button = d3.select("#BarFilter");
 
         // Checks if drop down menu was changed
         button.on("change", function(value) {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         //Function optionChange, Change data & graph based on menu
         function optionChanged(value) {
-            selectElement = document.querySelector("#statesFilter");
+            selectElement = document.querySelector("#BarFilter");
             output = selectElement.value;
 
             //Call functions on change

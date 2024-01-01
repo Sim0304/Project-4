@@ -133,8 +133,8 @@ d3.json("http://127.0.0.1:5000/get_data")
         updateCharts(data);
         
         // Attach event listener and handle state changes
-        const stateSelector = document.getElementById('stateSelector');
-        // stateSelector.removeEventListener('change', handleStateChange);  // Remove any existing event listener
+        const stateSelector = document.getElementById('stateFilter');
+        stateSelector.removeEventListener('change', handleStateChange);  // Remove any existing event listener
         stateSelector.addEventListener('change', handleStateChange.bind(stateSelector, data));
     })
     .catch(error => {
