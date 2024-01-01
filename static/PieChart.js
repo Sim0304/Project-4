@@ -2,6 +2,7 @@
 const url = "http://127.0.0.1:5000/get_data";
 
 // Fetch data from the URL
+document.addEventListener('DOMContentLoaded', function() {
 d3.json(url)
     .then(d => {
         // Log the fetched data for debugging
@@ -141,4 +142,4 @@ d3.json("http://127.0.0.1:5000/get_data")
     });
 
     
-    });
+    })});
