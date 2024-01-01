@@ -1,5 +1,5 @@
 // Define the URL
-const url = "http://127.0.0.1:5000/get_data";
+url = "http://127.0.0.1:5000/get_data";
 
 // Fetch data from the URL
 document.addEventListener('DOMContentLoaded', function() {
@@ -134,7 +134,7 @@ d3.json("http://127.0.0.1:5000/get_data")
         
         // Attach event listener and handle state changes
         const stateSelector = document.getElementById('stateSelector');
-        stateSelector.removeEventListener('change', handleStateChange);  // Remove any existing event listener
+        // stateSelector.removeEventListener('change', handleStateChange);  // Remove any existing event listener
         stateSelector.addEventListener('change', handleStateChange.bind(stateSelector, data));
     })
     .catch(error => {

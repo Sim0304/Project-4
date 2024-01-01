@@ -40,29 +40,9 @@
   <!------------------------ Body ------------------------>
   <body>
 
-    <h1>Disaster Statistics</h1>
-    <h2>Total Deaths by Category</h2>
-    <svg id="deathsChart"></svg>
-    <h2>Total Injuries by Category</h2>
-    <svg id="injuriesChart"></svg>
 
-   <!-- Div for line Chart -->
-   <div class="container mt-4">
-    <div class="mb-3">
-      <label for="categorySelect">Select Category:</label>
-      <select id="categorySelect" class="form-select"></select>
-    </div>
-
-    <div class="mb-3">
-      <label for="regionSelect">Select Region:</label>
-      <select id="regionSelect" class="form-select"></select>
-    </div>
-
-    <div id="chart"></div>
-  </div>
-
-    <!-- Div for state selection menu -->
-    <div id="stateFilter">
+     <!-- Div for state selection menu -->
+     <div id="stateFilter">
         <select id="statesFilter" onchange="optionChanged(this.value)">
             <option value="Queensland">Queensland</option>
             <option value="Northern Territory">Northern Territory</option>
@@ -80,6 +60,45 @@
     <canvas id="myChart"></canvas>
     </div>
 
+
+    <!-- Div for line Chart -->
+   <div class="container mt-4">
+    <div class="mb-3">
+      <label for="categorySelect">Select Category:</label>
+      <select id="categorySelect" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+      <label for="regionSelect">Select Region:</label>
+      <select id="regionSelect" class="form-select"></select>
+    </div>
+
+    <div id="chart"></div>
+  </div>
+
+  <!-- Pie Chart -->
+    <h1>Disaster Statistics</h1>
+    <!-- Dropdown to select state -->
+    <select id="stateSelector">
+        <option value="Queensland">Queensland</option>
+        <option value="Northern Territory">Northern Territory</option>
+        <option value="Western Australia">Western Australia</option>
+        <option value="New South Wales">New South Wales</option>
+        <option value="Tasmania">Tasmania</option>
+        <option value="Victoria">Victoria</option>
+        <option value="Outside Australia">Outside Australia</option>
+        <option value="Australian Capital Territory">Australian Capital Territory</option>
+    </select>
+
+    <h2>Total Deaths by Category</h2>
+    <svg id="deathsChart"></svg>
+    <h2>Total Injuries by Category</h2>
+    <svg id="injuriesChart"></svg>
+
+   
+
+   
+
     <!-- Div for Map -->
     <div id="map" style ="height: 400px"></div>
 
@@ -95,13 +114,15 @@
      <!-- <script src="{{url_for('static', filename='app.js')}}"></script> -->
      
 
-     <script src="{{url_for('static', filename='BarChart.js')}}"></script>
-     
+     <script src="{{url_for('static', filename='LineChart.js')}}"></script>
+
      <script src="{{url_for('static', filename='PieChart.js')}}"></script>
+     <script src="{{url_for('static', filename='BarChart.js')}}"></script>
+
+     
 
      <script src="{{url_for('static', filename='map.js')}}"></script>
 
-     <script src="{{url_for('static', filename='LineChart.js')}}"></script>
 
      
 
