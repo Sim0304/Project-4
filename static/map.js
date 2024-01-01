@@ -35,18 +35,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function plot markers from category 
     function plotMarkers(region,category) {
         indexValue = categoryNames.indexOf(category)
+        
+        if (groupData.get(region).get(category)) {
+            for (i = 0; i < groupData.get(region).get(category).length; i++) { 
+            
+                lat = groupData.get(region).get(category)[i].latitude
+                long = groupData.get(region).get(category)[i].logitude
 
-        for (i = 0; i < groupData.get(region).get(category).length; i++) { 
-            lat = groupData.get(region).get(category)[i].latitude
-            long = groupData.get(region).get(category)[i].logitude
-
-            circleMarker = L.circleMarker([lat,long], {
-                    radius:5,
-                    color:categoryColor[indexValue],
-                    fillOpacity:0.7
-                }).addTo(map)
+                circleMarker = L.circleMarker([lat,long], {
+                        radius:5,
+                        color:categoryColor[indexValue],
+                        fillOpacity:0.7
+                    }).addTo(map)
         }
-    }
+    }}
 
     // Get all the categories
     console.log(groupData.get("Victoria"))
