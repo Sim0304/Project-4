@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!------------------------ Head ------------------------>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Leaflet css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+ 
+    <!-- Leaflet javascript file -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <!-- Leaflet script-->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Our CSS -->
+    <link rel= "stylesheet" type= "text/css" src= "{{url_for('static',filename='styles/style.css')}}">
+
+    <!-- D3 script -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- plotly script -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- chart.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Title -->
+    <title>Chart.js example</title>
+
+  </head>
+
+  <!------------------------ Body ------------------------>
+  <body>
+
+    <h1>Disaster Statistics</h1>
+    <h2>Total Deaths by Category</h2>
+    <svg id="deathsChart"></svg>
+    <h2>Total Injuries by Category</h2>
+    <svg id="injuriesChart"></svg>
+
+   <!-- Div for line Chart -->
+   <div class="container mt-4">
+    <div class="mb-3">
+      <label for="categorySelect">Select Category:</label>
+      <select id="categorySelect" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+      <label for="regionSelect">Select Region:</label>
+      <select id="regionSelect" class="form-select"></select>
+    </div>
+
+    <div id="chart"></div>
+  </div>
+
+    <!-- Div for state selection menu -->
+    <div id="stateFilter">
+        <select id="statesFilter" onchange="optionChanged(this.value)">
+            <option value="Queensland">Queensland</option>
+            <option value="Northern Territory">Northern Territory</option>
+            <option value="Western Australia">Western Australia</option>
+            <option value="New South Wales">New South Wales</option>
+            <option value="Tasmania">Tasmania</option>
+            <option value="Victoria">Victoria</option>
+            <option value="Outside Australia">Outside Australia</option>
+            <option value="Australian Capital Territory">Australian Capital Territory</option>
+        </select>
+    </div>
+    
+    <!-- cavnas for barChart -->
+    <div id="barChart1">
+    <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Div for Map -->
+    <div id="map" style ="height: 400px"></div>
+
+   
+    <!-- chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- d3 Script -->
+     <script src="https://d3js.org/d3.v7.min.js"></script>
+     <!-- plotly script -->
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+     <!-- barGraph1 | app.js script -->
+     <!-- <script src="{{url_for('static', filename='app.js')}}"></script> -->
+     
+
+     <script src="{{url_for('static', filename='BarChart.js')}}"></script>
+     
+     <script src="{{url_for('static', filename='PieChart.js')}}"></script>
+
+     <script src="{{url_for('static', filename='map.js')}}"></script>
+
+     <script src="{{url_for('static', filename='LineChart.js')}}"></script>
+
+     
+
+     
+
+     
+  </body>
+</html>

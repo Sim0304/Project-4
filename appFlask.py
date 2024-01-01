@@ -66,6 +66,10 @@ def map():
 
     return render_template("map.html")
 
+@app.route("/dashboard")
+def dash():
+
+    return render_template("dashboard.html")
 
 ####################
 ##### Get Data #####
