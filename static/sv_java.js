@@ -1,6 +1,6 @@
 const url = "http://127.0.0.1:5000/get_data";
 
-const margin = { top: 20, right: 30, bottom: 60, left: 40 };
+const margin = { top: 20, right: 30, bottom: 20000000, left: 40 };
 const width = 1500 - margin.left - margin.right;
 const height = 1300 - margin.top - margin.bottom;
 

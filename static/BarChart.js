@@ -65,16 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     labels: yvalue,
                     datasets: [
                         {
-                        label: "Count Total",
+                        label: "Disaster Count",
                         data: xvalue,
                         backgroundColor: ["#FF5733", "#33FF57", "#5733FF", "#FF33A1", "#33A1FF", "#A1FF33", "#FF3333", "#33FFA1", "#A133FF", "#FFA133", "#33FF33", "#3333FF", "#FF33FF", "#33FFFF", "#FFFF33", "#FF6633", "#33FF66", "#6633FF", "#FF3366", "#3366FF"]
-                        } //, 
-
-                        // {
-                        // label: "Injury Total",
-                        // data: injuryValue
-                        // }
-                ]
+                        }]},
+                options: {
+                        responsive: true,
+                        plugins: {
+                              title: {
+                                display: true,
+                                text: 'Chart.js Bar Chart'
+                              }
+                            }
                 },
                 options: {
                     scales: {
