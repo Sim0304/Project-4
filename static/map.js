@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-    plotMarkers("Queensland","Cyclone")
+        categoryMarkers("Queensland")
     
     // Function plot markers from category 
     function plotMarkers(region,category) {
@@ -72,11 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
     ///////////////////////////////
 
         // Selecting drop down menu from html code
-        let button = d3.select("#statesFilter");
+        let button2 = d3.select("#mapFilter");
 
         // Checks if drop down menu was changed
-        button.on("change", function(value) {
-            selectElement = document.querySelector("#statesFilter");
+        button2.on("change", function(value) {
+            selectElement = document.querySelector("#mapFilter");
             output = selectElement.value
             console.log(output)
             
